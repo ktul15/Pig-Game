@@ -3,7 +3,7 @@ var holdDice = document.querySelector(".btn-hold");
 var newGame = document.querySelector(".btn-new");
 var image = document.querySelector(".dice");
 
-var diceNum, scores, currentScore, activePlayer, gamePlaying;
+var diceNum, scores, currentScore, activePlayer, gamePlaying, previousDice = 0;
 
 init();
 
@@ -13,8 +13,9 @@ rollDice.addEventListener("click", function() {
         // 1. Generate a random number and save it in a variable called "diceNum".
         generateRandomNum();
 
+        console.log(diceNum, previousDice);
         // 2. If diceNum is not 1 then add the diceNum to currentScore otherwise go to next player.
-        if (diceNum !== 1) {
+        if (diceNum !== 1 && diceNum !== previousDice) {
             // Display the image
             image.style.display = "block";
 
@@ -27,8 +28,17 @@ rollDice.addEventListener("click", function() {
             // Display the currentScore.
             document.querySelector("#current-" + activePlayer).textContent = currentScore;
         } else {
+            if (diceNum === 6) {
+                scores[activePlayer] = 0;
+                document.querySelector("#score-" + activePlayer).textContent = scores[activePlayer];
+            }
             nextPlayer();
         }
+
+        // 3. if a player rolls two 6 in a row then call the nextPlayer() function..
+        // Store the diceNum in another variable if it is 6.
+        diceNum === 6 ? previousDice = diceNum : previousDice = 0;
+        console.log(diceNum, previousDice);
     }
 });
 
@@ -42,7 +52,7 @@ holdDice.addEventListener("click", function() {
         // update UI.
         document.querySelector("#score-" + activePlayer).textContent = scores[activePlayer];
         // Chack if player won the game.
-        if (scores[activePlayer] >= 10) {
+        if (scores[activePlayer] >= 100) {
             document.querySelector("#name-" + activePlayer).textContent = "Winner!";
             document.querySelector(".dice").style.display = "none";
             document.querySelector(".player-" + activePlayer + "-panel").classList.add("winner");
@@ -105,5 +115,5 @@ function nextPlayer() {
     document.querySelector(".player-1-panel").classList.toggle("active");
 
     // hide the image
-    image.style.display = "none";
+    // image.style.display = "none";
 }
