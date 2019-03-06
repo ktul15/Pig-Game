@@ -2,7 +2,7 @@ var rollDice = document.querySelector(".btn-roll");
 var holdDice = document.querySelector(".btn-hold");
 var newGame = document.querySelector(".btn-new");
 var image = document.querySelector(".dice");
-
+var winScore = document.querySelector("#winScore");
 var diceNum, scores, currentScore, activePlayer, gamePlaying, previousDice = 0;
 
 init();
@@ -52,7 +52,7 @@ holdDice.addEventListener("click", function() {
         // update UI.
         document.querySelector("#score-" + activePlayer).textContent = scores[activePlayer];
         // Chack if player won the game.
-        if (scores[activePlayer] >= 100) {
+        if (scores[activePlayer] >= winScore.value) {
             document.querySelector("#name-" + activePlayer).textContent = "Winner!";
             document.querySelector(".dice").style.display = "none";
             document.querySelector(".player-" + activePlayer + "-panel").classList.add("winner");

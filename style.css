@@ -15,6 +15,26 @@ body {
     color: #555;
 }
 
+
+/*INPUT BOX TO SET WINNING SCORE*/
+
+.setWinScore {
+    position: absolute;
+    top: 45px;
+    left: 200px;
+    color: #555;
+    z-index: 1;
+    font-size: 20px;
+}
+
+input {
+    border: none;
+    padding: 10px;
+    outline: none;
+    background: none;
+    font-size: 20px;
+}
+
 .wrapper {
     width: 1000px;
     position: absolute;
